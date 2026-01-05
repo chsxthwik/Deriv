@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "X Reels Scroll",
+  "version": "1.0.0",
+  "description": "Scroll X.com posts one-by-one like Instagram Reels.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://x.com/*", "https://twitter.com/*"],
+  "action": {
+    "default_title": "Toggle Reels Mode"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

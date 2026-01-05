@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 260px;
+  background: #0b0f14;
+  color: #e7eef7;
+  font: 13px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.wrap {
+  padding: 12px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  user-select: none;
+}
+
+.hint {
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
