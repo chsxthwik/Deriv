@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSecurity Toolkit - Dashboard</title>
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1f2937;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --danger: #ff4444;
+            --warning: #ffaa00;
+            --text-primary: #f0f0f0;
+            --text-secondary: #9ca3af;
+            --border: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border-bottom: 2px solid var(--accent);
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 5px;
+            background: var(--bg-secondary);
+            padding: 5px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-tab:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .nav-tab.active {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Consolas', monospace;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dim);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .result-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .result-box pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .strength-meter {
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .strength-meter-fill {
+            height: 100%;
+            transition: width 0.3s, background 0.3s;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-critical { background: var(--danger); color: white; }
+        .badge-high { background: #ff6b6b; color: white; }
+        .badge-medium { background: var(--warning); color: black; }
+        .badge-low { background: #4dabf7; color: white; }
+        .badge-info { background: #69db7c; color: black; }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-card .label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-danger {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .alert-warning {
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+        }
+
+        .alert-success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list .icon {
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">&#128274;</div>
+                <div>
+                    <h1>CyberSecurity Toolkit</h1>
+                    <p>Professional Security Analysis Platform</p>
+                </div>
+            </div>
+            <div>
+                <span style="color: var(--accent);">v1.0.0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
+            <button class="nav-tab" onclick="showTab('password')">Password Security</button>
+            <button class="nav-tab" onclick="showTab('crypto')">Crypto Tools</button>
+            <button class="nav-tab" onclick="showTab('network')">Network Analysis</button>
+            <button class="nav-tab" onclick="showTab('scanner')">Code Scanner</button>
+            <button class="nav-tab" onclick="showTab('file')">File Security</button>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="value">6</div>
+                    <div class="label">Security Modules</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">30+</div>
+                    <div class="label">Security Features</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">10+</div>
+                    <div class="label">Hash Algorithms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">7</div>
+                    <div class="label">Vulnerability Types</div>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>&#128272; Password Security</h2>
+                    <ul class="feature-list">
+                        <li><span class="icon">&#10004;</span> Password strength analysis</li>
+                        <li><span class="icon">&#10004;</span> Secure password generation</li>
+                        <li><span class="icon">&#10004;</span> Multiple hash algorithms</li>
+                        <li><span class="icon">&#10004;</span> Entropy calculation</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>&#128273; Cryptographic Tools</h2>
+                    <ul class="feature-list">
+                        <li><span class="icon">&#10004;</span> AES-256 encryption</li>
+                        <li><span class="icon">&#10004;</span> RSA key generation</li>
+                        <li><span class="icon">&#10004;</span> Digital signatures</li>
+                        <li><span class="icon">&#10004;</span> JWT analysis</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>&#127760; Network Security</h2>
+                    <ul class="feature-list">
+                        <li><span class="icon">&#10004;</span> Port scanning</li>
+                        <li><span class="icon">&#10004;</span> DNS analysis</li>
+                        <li><span class="icon">&#10004;</span> SSL/TLS inspection</li>
+                        <li><span class="icon">&#10004;</span> HTTP header analysis</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>&#128270; Code Scanner</h2>
+                    <ul class="feature-list">
+                        <li><span class="icon">&#10004;</span> SQL injection detection</li>
+                        <li><span class="icon">&#10004;</span> XSS detection</li>
+                        <li><span class="icon">&#10004;</span> Command injection</li>
+                        <li><span class="icon">&#10004;</span> Sensitive data exposure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Password Security -->
+        <div id="password" class="tab-content">
+            <div class="grid">
+                <div class="card">
+                    <h2>&#128271; Password Analyzer</h2>
+                    <div class="input-group">
+                        <label>Enter Password to Analyze</label>
+                        <input type="password" id="passwordInput" placeholder="Enter password...">
+                    </div>
+                    <button class="btn btn-primary" onclick="analyzePassword()">Analyze Password</button>
+                    <div id="passwordResult" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#128273; Password Generator</h2>
+                    <div class="input-group">
+                        <label>Password Length</label>
+                        <input type="number" id="passLength" value="16" min="8" max="128">
+                    </div>
+                    <div class="input-group">
+                        <label>Character Types</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="useUpper" checked> Uppercase</label>
+                            <label><input type="checkbox" id="useLower" checked> Lowercase</label>
+                            <label><input type="checkbox" id="useDigits" checked> Digits</label>
+                            <label><input type="checkbox" id="useSpecial" checked> Special</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="generatePassword()">Generate Password</button>
+                    <div id="generatedPassword" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#128268; Hash Generator</h2>
+                    <div class="input-group">
+                        <label>Text to Hash</label>
+                        <input type="text" id="hashInput" placeholder="Enter text...">
+                    </div>
+                    <button class="btn btn-primary" onclick="generateHash()">Generate Hashes</button>
+                    <div id="hashResult" class="result-box" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crypto Tools -->
+        <div id="crypto" class="tab-content">
+            <div class="grid">
+                <div class="card">
+                    <h2>&#128272; Encoding/Decoding</h2>
+                    <div class="input-group">
+                        <label>Text Input</label>
+                        <textarea id="encodeInput" rows="3" placeholder="Enter text..."></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Encoding Type</label>
+                        <select id="encodeType">
+                            <option value="base64">Base64</option>
+                            <option value="hex">Hexadecimal</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="encodeData()">Encode</button>
+                    <button class="btn btn-secondary" onclick="decodeData()">Decode</button>
+                    <div id="encodeResult" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#128273; JWT Analyzer</h2>
+                    <div class="input-group">
+                        <label>JWT Token</label>
+                        <textarea id="jwtInput" rows="3" placeholder="eyJhbGciOiJIUzI1NiIs..."></textarea>
+                    </div>
+                    <button class="btn btn-primary" onclick="analyzeJWT()">Analyze JWT</button>
+                    <div id="jwtResult" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#128274; Key Generator</h2>
+                    <div class="input-group">
+                        <label>Key Type</label>
+                        <select id="keyType">
+                            <option value="aes256">AES-256</option>
+                            <option value="aes128">AES-128</option>
+                            <option value="chacha20">ChaCha20</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateKey()">Generate Key</button>
+                    <div id="keyResult" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#127919; Secure Token Generator</h2>
+                    <div class="input-group">
+                        <label>Token Length (bytes)</label>
+                        <input type="number" id="tokenLength" value="32" min="8" max="256">
+                    </div>
+                    <div class="input-group">
+                        <label>Format</label>
+                        <select id="tokenFormat">
+                            <option value="hex">Hexadecimal</option>
+                            <option value="base64">Base64</option>
+                            <option value="urlsafe">URL-safe Base64</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateToken()">Generate Token</button>
+                    <div id="tokenResult" class="result-box" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network Analysis -->
+        <div id="network" class="tab-content">
+            <div class="alert alert-warning">
+                &#9888; Network scanning should only be performed on systems you own or have explicit authorization to test.
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h2>&#127760; Port Scanner</h2>
+                    <div class="input-group">
+                        <label>Target Host</label>
+                        <input type="text" id="scanTarget" placeholder="localhost or IP address">
+                    </div>
+                    <button class="btn btn-primary" onclick="scanPorts()">Scan Common Ports</button>
+                    <div id="scanResult" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#128269; DNS Lookup</h2>
+                    <div class="input-group">
+                        <label>Domain Name</label>
+                        <input type="text" id="dnsTarget" placeholder="example.com">
+                    </div>
+                    <button class="btn btn-primary" onclick="dnsLookup()">Lookup DNS</button>
+                    <div id="dnsResult" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#128274; SSL/TLS Analyzer</h2>
+                    <div class="input-group">
+                        <label>Host</label>
+                        <input type="text" id="sslTarget" placeholder="example.com">
+                    </div>
+                    <button class="btn btn-primary" onclick="analyzeSSL()">Analyze SSL</button>
+                    <div id="sslResult" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#128220; HTTP Header Analyzer</h2>
+                    <div class="input-group">
+                        <label>URL</label>
+                        <input type="text" id="headerUrl" placeholder="https://example.com">
+                    </div>
+                    <button class="btn btn-primary" onclick="analyzeHeaders()">Analyze Headers</button>
+                    <div id="headerResult" class="result-box" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Scanner -->
+        <div id="scanner" class="tab-content">
+            <div class="card">
+                <h2>&#128270; Vulnerability Scanner</h2>
+                <div class="input-group">
+                    <label>Language</label>
+                    <select id="codeLanguage">
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="php">PHP</option>
+                        <option value="java">Java</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Paste Code to Scan</label>
+                    <textarea id="codeInput" rows="15" placeholder="Paste your code here..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="scanCode()">Scan for Vulnerabilities</button>
+                <div id="scanCodeResult" class="result-box" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- File Security -->
+        <div id="file" class="tab-content">
+            <div class="grid">
+                <div class="card">
+                    <h2>&#128196; File Hash Calculator</h2>
+                    <div class="input-group">
+                        <label>Select File</label>
+                        <input type="file" id="fileHash" style="padding: 10px;">
+                    </div>
+                    <button class="btn btn-primary" onclick="calculateFileHash()">Calculate Hashes</button>
+                    <div id="fileHashResult" class="result-box" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h2>&#128269; File Analyzer</h2>
+                    <div class="input-group">
+                        <label>Select File</label>
+                        <input type="file" id="fileAnalyze" style="padding: 10px;">
+                    </div>
+                    <button class="btn btn-primary" onclick="analyzeFile()">Analyze File</button>
+                    <div id="fileAnalyzeResult" class="result-box" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>CyberSecurity Toolkit v1.0.0 | For authorized security testing only</p>
+        <p>Use responsibly and ethically</p>
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        async function apiCall(endpoint, data) {
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                return await response.json();
+            } catch (error) {
+                return {error: error.message};
+            }
+        }
+
+        function showResult(elementId, data) {
+            const el = document.getElementById(elementId);
+            el.style.display = 'block';
+            el.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+        }
+
+        async function analyzePassword() {
+            const password = document.getElementById('passwordInput').value;
+            const result = await apiCall('/api/password/analyze', {password});
+            showResult('passwordResult', result);
+        }
+
+        async function generatePassword() {
+            const data = {
+                length: parseInt(document.getElementById('passLength').value),
+                uppercase: document.getElementById('useUpper').checked,
+                lowercase: document.getElementById('useLower').checked,
+                digits: document.getElementById('useDigits').checked,
+                special: document.getElementById('useSpecial').checked
+            };
+            const result = await apiCall('/api/password/generate', data);
+            showResult('generatedPassword', result);
+        }
+
+        async function generateHash() {
+            const password = document.getElementById('hashInput').value;
+            const result = await apiCall('/api/password/hash', {password});
+            showResult('hashResult', result);
+        }
+
+        async function encodeData() {
+            const data = document.getElementById('encodeInput').value;
+            const encoding = document.getElementById('encodeType').value;
+            const result = await apiCall('/api/crypto/encode', {data, encoding});
+            showResult('encodeResult', result);
+        }
+
+        async function decodeData() {
+            const data = document.getElementById('encodeInput').value;
+            const encoding = document.getElementById('encodeType').value;
+            const result = await apiCall('/api/crypto/decode', {data, encoding});
+            showResult('encodeResult', result);
+        }
+
+        async function analyzeJWT() {
+            const token = document.getElementById('jwtInput').value;
+            const result = await apiCall('/api/crypto/jwt-analyze', {token});
+            showResult('jwtResult', result);
+        }
+
+        async function generateKey() {
+            const type = document.getElementById('keyType').value;
+            const result = await apiCall('/api/crypto/generate-key', {type});
+            showResult('keyResult', result);
+        }
+
+        async function generateToken() {
+            const length = parseInt(document.getElementById('tokenLength').value);
+            const format = document.getElementById('tokenFormat').value;
+            const result = await apiCall('/api/crypto/generate-token', {length, format});
+            showResult('tokenResult', result);
+        }
+
+        async function scanPorts() {
+            const target = document.getElementById('scanTarget').value;
+            document.getElementById('scanResult').innerHTML = '<p>Scanning...</p>';
+            document.getElementById('scanResult').style.display = 'block';
+            const result = await apiCall('/api/network/scan', {target});
+            showResult('scanResult', result);
+        }
+
+        async function dnsLookup() {
+            const domain = document.getElementById('dnsTarget').value;
+            const result = await apiCall('/api/network/dns', {domain});
+            showResult('dnsResult', result);
+        }
+
+        async function analyzeSSL() {
+            const host = document.getElementById('sslTarget').value;
+            document.getElementById('sslResult').innerHTML = '<p>Analyzing...</p>';
+            document.getElementById('sslResult').style.display = 'block';
+            const result = await apiCall('/api/network/ssl', {host});
+            showResult('sslResult', result);
+        }
+
+        async function analyzeHeaders() {
+            const url = document.getElementById('headerUrl').value;
+            const result = await apiCall('/api/network/headers', {url});
+            showResult('headerResult', result);
+        }
+
+        async function scanCode() {
+            const code = document.getElementById('codeInput').value;
+            const language = document.getElementById('codeLanguage').value;
+            document.getElementById('scanCodeResult').innerHTML = '<p>Scanning for vulnerabilities...</p>';
+            document.getElementById('scanCodeResult').style.display = 'block';
+            const result = await apiCall('/api/scan/code', {code, language});
+            showResult('scanCodeResult', result);
+        }
+
+        async function calculateFileHash() {
+            const fileInput = document.getElementById('fileHash');
+            if (!fileInput.files[0]) {
+                alert('Please select a file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                const response = await fetch('/api/file/hash', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                showResult('fileHashResult', result);
+            } catch (error) {
+                showResult('fileHashResult', {error: error.message});
+            }
+        }
+
+        async function analyzeFile() {
+            const fileInput = document.getElementById('fileAnalyze');
+            if (!fileInput.files[0]) {
+                alert('Please select a file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                const response = await fetch('/api/file/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                showResult('fileAnalyzeResult', result);
+            } catch (error) {
+                showResult('fileAnalyzeResult', {error: error.message});
+            }
+        }
+    </script>
+</body>
+</html>
