@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "X/Twitter Reels Scroll",
+  "version": "1.0",
+  "description": "Scroll X/Twitter posts like Instagram Reels (one by one, full view).",
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://x.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "permissions": []
+}

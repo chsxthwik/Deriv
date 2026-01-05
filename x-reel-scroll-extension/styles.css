@@ -1,0 +1,113 @@
+/* X/Twitter Reels Mode Styles */
+
+/* Base container modifications */
+html.x-reels-mode {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Hide scrollbar for immersion */
+}
+
+html.x-reels-mode::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide distracting elements in reels mode */
+html.x-reels-mode header[role="banner"], 
+html.x-reels-mode [data-testid="sidebarColumn"],
+html.x-reels-mode [data-testid="primaryColumn"] > div > div:first-child, /* Top sticky header */
+html.x-reels-mode [data-testid="BottomBar"] {
+  opacity: 0;
+  pointer-events: none; /* Prevent accidental clicks */
+  position: absolute; /* Remove from flow to prevent spacing issues */
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Re-enable if user really needs them via hover areas? 
+   No, "full post view clear working" implies clean UI. 
+   We provide a toggle button to exit.
+*/
+
+/* Maximize the primary column width */
+html.x-reels-mode [data-testid="primaryColumn"] {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html.x-reels-mode [data-testid="primaryColumn"] > div > div:last-child {
+  max-width: 100vw !important;
+}
+
+/* Target the tweet wrapper */
+html.x-reels-mode div[data-testid="cellInnerDiv"]:has(article[data-testid="tweet"]) {
+  height: 100vh !important;
+  width: 100vw !important;
+  scroll-snap-align: start !important;
+  scroll-snap-stop: always !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-bottom: none !important;
+  background: black !important; /* Force dark mode feel or match theme */
+}
+
+/* Handle light/dark mode background - default to transparent to inherit */
+html.x-reels-mode div[data-testid="cellInnerDiv"]:has(article[data-testid="tweet"]) {
+  background: transparent !important;
+}
+
+/* Center the tweet content */
+html.x-reels-mode article[data-testid="tweet"] {
+  width: 100% !important;
+  max-width: 600px !important; /* Standard phone width feel */
+  /* Remove borders */
+  border: none !important;
+  /* Add scale effect or transition */
+  transition: transform 0.3s ease;
+}
+
+/* Hide non-tweet cells (promoted, who to follow, etc) to maintain flow */
+/* Be careful: this might hide the 'Show more' button. 
+   Let's only hide specific known clutter if possible, or just accept small gaps.
+   For now, we won't strictly hide them, but they won't snap.
+*/
+
+/* Improve media visibility */
+html.x-reels-mode [data-testid="tweetPhoto"] img,
+html.x-reels-mode [data-testid="videoPlayer"] video {
+  max-height: 85vh !important;
+  object-fit: contain !important;
+}
+
+/* Toggle Button */
+#x-reels-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 2147483647; /* Max z-index */
+  padding: 12px 24px;
+  background-color: #1d9bf0;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+#x-reels-toggle:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* Active state for button */
+#x-reels-toggle.active {
+  background-color: #f4212e; /* Red to disable */
+}
