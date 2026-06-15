@@ -1,0 +1,19 @@
+Hermes Agent - AGI 
+
+- https://openrouter.ai/openrouter/owl-alpha
+- https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free
+- https://openrouter.ai/deepseek/deepseek-v4-flash
+- https://openrouter.ai/nex-agi/nex-n2-pro:free
+
+
+OpenAI - Codex 
+Anthropic - Claude 
+Nvidia   - Nemotron 3 Ultra
+Moonshot - Kimi K2.7 Ultra speed 
+Zhipu Ai - GLM 5.2 & https://zwork.z.ai/
+Deepseek - Deepseek V4 Flash 
+Alibaba  - Qwen 3.7 Plus 
+Xiaomi   - MiMo-V2.5
+MiniMax  - MiniMax M3 
+
+
