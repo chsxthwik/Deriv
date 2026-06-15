@@ -4,6 +4,8 @@ Hermes Agent - AGI
 - https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free
 - https://openrouter.ai/deepseek/deepseek-v4-flash
 - https://openrouter.ai/nex-agi/nex-n2-pro:free
+- https://openrouter.ai/models
+- https://models.dev/
 
 
 OpenAI - Codex 
@@ -12,9 +14,12 @@ Nvidia   - Nemotron 3 Ultra
 Moonshot AI - Kimi K2.7 Ultra speed 
 Zhipu AI - GLM 5.2 & https://zwork.z.ai/
 Deepseek - Deepseek V4 Flash 
+Mistral AI - Mistral Large / Mixtral
 Alibaba  - Qwen 3.7 Plus 
 Xiaomi   - MiMo-V2.5
 MiniMax  - MiniMax M3 
-Mistral AI - Mistral Large / Mixtral
 
-
+- Use Kimi K2.7 - Coding 
+- Use Zhipu GLM 5.2 - Coding 
+- Use Qwen          - Coding 
+ 
