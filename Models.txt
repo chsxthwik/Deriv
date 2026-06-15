@@ -9,11 +9,12 @@ Hermes Agent - AGI
 OpenAI - Codex 
 Anthropic - Claude 
 Nvidia   - Nemotron 3 Ultra
-Moonshot - Kimi K2.7 Ultra speed 
-Zhipu Ai - GLM 5.2 & https://zwork.z.ai/
+Moonshot AI - Kimi K2.7 Ultra speed 
+Zhipu AI - GLM 5.2 & https://zwork.z.ai/
 Deepseek - Deepseek V4 Flash 
 Alibaba  - Qwen 3.7 Plus 
 Xiaomi   - MiMo-V2.5
 MiniMax  - MiniMax M3 
+Mistral AI - Mistral Large / Mixtral
 
 
