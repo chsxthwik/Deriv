@@ -5,6 +5,7 @@ Hermes Agent - AGI
 - https://openrouter.ai/deepseek/deepseek-v4-flash
 - https://openrouter.ai/nex-agi/nex-n2-pro:free
 - https://openrouter.ai/models
+- https://arena.ai/
 - https://models.dev/
 
 
