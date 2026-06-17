@@ -13,7 +13,7 @@ OpenAI - Codex
 Anthropic - Claude 
 Cursor AI - Composer 
 Lovable AI - Multiple Agents 
-Nvidia   - Nemotron 3 Ultra
+OpenCode AI - All AI Models & Nvidia   - Nemotron 3 Ultra
 Zhipu AI - GLM 5.2 & https://zwork.z.ai/ Max
 Moonshot AI - Kimi K2.7 Ultra speed 
 Alibaba  - Qwen 3.7 Max
@@ -23,6 +23,7 @@ Mistral AI - Mistral Large / Mixtral
 Xiaomi   - MiMo-V2.5
 
 PURCHASE:
-- SuperGrok & Claude Pro & Cursor Pro & Lovable AI & Perplexity Pro & Codex Plus & Google AI  
+- SuperGrok & Claude Pro & Cursor Pro & Lovable AI & Perplexity Pro & Codex Plus & Google AI & GitHub Copilot & Devin AI 
+- X & 
 
  
