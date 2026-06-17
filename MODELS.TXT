@@ -10,16 +10,22 @@ Hermes Agent - AGI
 
 OpenAI - Codex 
 Anthropic - Claude 
+Cursor AI - Composer 
+Lovable AI - Multiple Agents 
 Nvidia   - Nemotron 3 Ultra
-Moonshot AI - Kimi K2.7 Ultra speed 
 Zhipu AI - GLM 5.2 & https://zwork.z.ai/
-Deepseek - Deepseek V4 Flash 
-Mistral AI - Mistral Large / Mixtral
+Moonshot AI - Kimi K2.7 Ultra speed 
+MiniMax  - MiniMax M3
+Deepseek - Deepseek V4 Flash
 Alibaba  - Qwen 3.7 Plus 
+Mistral AI - Mistral Large / Mixtral
 Xiaomi   - MiMo-V2.5
-MiniMax  - MiniMax M3 
 
-- Use Kimi K2.7 - Coding 
-- Use Zhipu GLM 5.2 - Coding 
+- Use Zhipu GLM 5.2 - Coding
+- Use Kimi K2.7 - Coding  
 - Use Qwen          - Coding 
+
+PURCHASE:
+- SuperGrok & Claude Pro & Cursor Pro & Lovable AI & Perplexity Pro & Codex Plus & Google AI  
+
  
