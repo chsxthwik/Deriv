@@ -1,0 +1,423 @@
+/* X Scroll Extension - Reels Style CSS */
+
+/* When reels mode is active */
+body.x-scroll-reels-mode {
+  overflow: hidden !important;
+}
+
+/* Hide sidebar and other elements in reels mode */
+body.x-scroll-reels-mode [data-testid="sidebarColumn"],
+body.x-scroll-reels-mode [data-testid="primaryColumn"] > div:first-child,
+body.x-scroll-reels-mode header[role="banner"] {
+  display: none !important;
+}
+
+/* Main container for reels view */
+.x-scroll-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: #000 !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+/* Post wrapper */
+.x-scroll-post-wrapper {
+  width: 100%;
+  max-width: 600px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Individual post styling */
+.x-scroll-post {
+  background: #16181c;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 100%;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid #2f3336;
+}
+
+.x-scroll-post::-webkit-scrollbar {
+  width: 6px;
+}
+
+.x-scroll-post::-webkit-scrollbar-track {
+  background: #16181c;
+  border-radius: 3px;
+}
+
+.x-scroll-post::-webkit-scrollbar-thumb {
+  background: #3d4145;
+  border-radius: 3px;
+}
+
+.x-scroll-post::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Post header with user info */
+.x-scroll-post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.x-scroll-post-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 12px;
+  object-fit: cover;
+}
+
+.x-scroll-post-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.x-scroll-post-name {
+  color: #e7e9ea;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.x-scroll-post-username {
+  color: #71767b;
+  font-size: 14px;
+}
+
+/* Post content */
+.x-scroll-post-content {
+  color: #e7e9ea;
+  font-size: 17px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  word-wrap: break-word;
+}
+
+/* Post media */
+.x-scroll-post-media {
+  margin: 12px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.x-scroll-post-media img,
+.x-scroll-post-media video {
+  max-width: 100%;
+  max-height: 50vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* Post stats */
+.x-scroll-post-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  border-top: 1px solid #2f3336;
+  margin-top: 12px;
+}
+
+.x-scroll-stat {
+  display: flex;
+  align-items: center;
+  color: #71767b;
+  font-size: 13px;
+}
+
+.x-scroll-stat svg {
+  margin-right: 6px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Navigation controls */
+.x-scroll-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000000;
+}
+
+.x-scroll-nav-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.x-scroll-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.x-scroll-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.x-scroll-nav-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Close button */
+.x-scroll-close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 1000000;
+  backdrop-filter: blur(10px);
+}
+
+.x-scroll-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* Post counter */
+.x-scroll-counter {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  z-index: 1000000;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Keyboard shortcut hint */
+.x-scroll-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #71767b;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  z-index: 1000000;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.x-scroll-hint kbd {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin: 0 2px;
+  color: #e7e9ea;
+}
+
+/* Loading indicator */
+.x-scroll-loading {
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.x-scroll-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #1d9bf0;
+  border-radius: 50%;
+  animation: x-scroll-spin 1s linear infinite;
+}
+
+@keyframes x-scroll-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Toggle button on page */
+.x-scroll-toggle-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1d9bf0, #1a8cd8);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(29, 155, 240, 0.4);
+  transition: all 0.3s ease;
+  z-index: 99999;
+}
+
+.x-scroll-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(29, 155, 240, 0.5);
+}
+
+.x-scroll-toggle-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Animation for post transition */
+.x-scroll-post-enter {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.x-scroll-post-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.x-scroll-post-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.x-scroll-post-exit-active {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+/* Quote tweet styling */
+.x-scroll-quote-tweet {
+  border: 1px solid #2f3336;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 12px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Link styling */
+.x-scroll-post-content a {
+  color: #1d9bf0;
+  text-decoration: none;
+}
+
+.x-scroll-post-content a:hover {
+  text-decoration: underline;
+}
+
+/* Timestamp */
+.x-scroll-timestamp {
+  color: #71767b;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* Action buttons in post */
+.x-scroll-actions {
+  position: fixed;
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1000000;
+}
+
+.x-scroll-action-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+}
+
+.x-scroll-action-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.x-scroll-action-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.x-scroll-action-btn span {
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+/* Progress bar */
+.x-scroll-progress {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  z-index: 1000000;
+}
+
+.x-scroll-progress-fill {
+  width: 100%;
+  background: #1d9bf0;
+  border-radius: 2px;
+  transition: height 0.3s ease;
+}
